@@ -1,2 +1,0 @@
-scoliosis
-no-scoliosis
