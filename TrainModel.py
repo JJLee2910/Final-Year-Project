@@ -5,12 +5,13 @@ from keras.models import Sequential
 from keras.layers import Conv2D, MaxPooling2D, Dense, Dropout, Flatten
 from keras.optimizers import Adam
 from keras.preprocessing.image import ImageDataGenerator
+import pickle
 
 # Initialize image data generator with rescaling
 train_data_gen = ImageDataGenerator(rescale=1./255)
 validation_data_gen = ImageDataGenerator(rescale=1./255)
 
-# Preprocess all test images
+# Preprocess all train images
 train_generator = train_data_gen.flow_from_directory(
         'data/train',
         target_size=(48, 48),
@@ -18,7 +19,7 @@ train_generator = train_data_gen.flow_from_directory(
         color_mode="grayscale",
         class_mode='categorical')
 
-# Preprocess all train images
+# Preprocess all test images
 validation_generator = validation_data_gen.flow_from_directory(
         'data/test',
         target_size=(48, 48),
@@ -59,9 +60,12 @@ emotion_model_info = emotion_model.fit_generator(
 
 # save model structure in jason file
 model_json = emotion_model.to_json()
-with open("emotion_model.json", "w") as json_file:
+with open("emotion_model_1.json", "w") as json_file:
     json_file.write(model_json)
 
 # save trained model weight in .h5 file
-emotion_model.save_weights('emotion_model.h5')
+emotion_model.save_weights('emotion_model_1.h5')
 
+# Save the history object
+with open('emotion_model_history.pkl', 'wb') as f:
+    pickle.dump(emotion_model_info.history, f)
