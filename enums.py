@@ -4,3 +4,4 @@ from enum import Enum
 class Pages(Enum):
     LOGIN = 0
     DASHBOARD = 1
+    REGISTER_FORM = 2

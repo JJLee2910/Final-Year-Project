@@ -20,3 +20,6 @@ class MyMainWindow(QMainWindow):
 
     def go_dashboard(self):
         self.router.setCurrentIndex(Pages.DASHBOARD.value)
+    
+    def go_register(self):
+        self.router.setCurrentIndex(Pages.REGISTER_FORM.value)

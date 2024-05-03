@@ -1,4 +1,5 @@
 from UI.Login import *
+from UI.register import *
 from Controller.my_main_window import MyMainWindow
 from PyQt5.QtWidgets import (
     QApplication,
@@ -29,6 +30,7 @@ class LoginController(MyMainWindow):
         self.data = self.userDao.get_data()
 
         self.ui.loginButton.clicked.connect(self.login)
+        self.ui.registerButton.clicked.connect(self.register)
 
     def login(self):
         # Get the input values from the login form

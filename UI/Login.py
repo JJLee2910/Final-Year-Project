@@ -70,9 +70,9 @@ class Ui_loginForm(object):
         self.passwordLabel.setFrameShadow(QtWidgets.QFrame.Plain)
         self.passwordLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.passwordLabel.setObjectName("passwordLabel")
-        self.regosterButton = QtWidgets.QPushButton(self.loginPageWidget)
-        self.regosterButton.setGeometry(QtCore.QRect(40, 310, 101, 41))
-        self.regosterButton.setObjectName("regosterButton")
+        self.registerButton = QtWidgets.QPushButton(self.loginPageWidget)
+        self.registerButton.setGeometry(QtCore.QRect(40, 310, 101, 41))
+        self.registerButton.setObjectName("registerButton")
         self.loginButton = QtWidgets.QPushButton(self.loginPageWidget)
         self.loginButton.setGeometry(QtCore.QRect(440, 310, 101, 41))
         self.loginButton.setObjectName("loginButton")
@@ -87,7 +87,7 @@ class Ui_loginForm(object):
         self.loginPageLabel.setText(_translate("loginForm", "LOGIN PAGE"))
         self.usernameLabel.setText(_translate("loginForm", "Username"))
         self.passwordLabel.setText(_translate("loginForm", "Password"))
-        self.regosterButton.setText(_translate("loginForm", "Register"))
+        self.registerButton.setText(_translate("loginForm", "Register"))
         self.loginButton.setText(_translate("loginForm", "Login"))
 from UI import res
 

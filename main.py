@@ -9,6 +9,13 @@ from enums import Pages
 from Controller import (
     loginController,
 )
+from UI.register import Ui_Form
+
+class RegisterPage(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.ui = Ui_Form()
+        self.ui.setupUi(self)
 
 def add_pages(router):
     data = AppData
@@ -17,6 +24,7 @@ def add_pages(router):
     loginPage = loginController.LoginController(router)
     router.addWidget(loginPage)
     data.loginPage = loginPage
+    
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
