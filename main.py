@@ -11,11 +11,6 @@ from Controller import (
 )
 from UI.register import Ui_Form
 
-class RegisterPage(QWidget):
-    def __init__(self):
-        super().__init__()
-        self.ui = Ui_Form()
-        self.ui.setupUi(self)
 
 def add_pages(router):
     data = AppData
