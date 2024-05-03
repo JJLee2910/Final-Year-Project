@@ -61,4 +61,4 @@ class RegisterController(QWidget):
         message_box.setText("Registration successful!")
         message_box.exec_()
 
-        self.router.navigate(Pages.LOGIN)
+        # self.router.navigate(Pages.LOGIN)
