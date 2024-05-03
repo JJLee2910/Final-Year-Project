@@ -3,11 +3,13 @@ import sys
 
 from PyQt5.QtCore import Qt
 from UI.Login import *
+from UI.register import *
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
 from app_data import AppData
 from enums import Pages
 from Controller import (
     loginController,
+    registerController
 )
 from UI.register import Ui_Form
 

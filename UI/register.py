@@ -11,11 +11,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Form(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(750, 623)
-        self.regPageWidget = QtWidgets.QWidget(Form)
+class Ui_registerForm(object):
+    def setupUi(self, registerForm):
+        registerForm.setObjectName("registerForm")
+        registerForm.resize(750, 623)
+        self.regPageWidget = QtWidgets.QWidget(registerForm)
         self.regPageWidget.setGeometry(QtCore.QRect(80, 170, 591, 421))
         self.regPageWidget.setObjectName("regPageWidget")
         self.usernameRegInput = QtWidgets.QLineEdit(self.regPageWidget)
@@ -68,7 +68,7 @@ class Ui_Form(object):
         self.passwordRegInput_2.setText("")
         self.passwordRegInput_2.setEchoMode(QtWidgets.QLineEdit.Password)
         self.passwordRegInput_2.setObjectName("passwordRegInput_2")
-        self.loginWidget = QtWidgets.QWidget(Form)
+        self.loginWidget = QtWidgets.QWidget(registerForm)
         self.loginWidget.setGeometry(QtCore.QRect(79, 30, 591, 131))
         self.loginWidget.setObjectName("loginWidget")
         self.logoLabel = QtWidgets.QLabel(self.loginWidget)
@@ -88,16 +88,16 @@ class Ui_Form(object):
         self.titleLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.titleLabel.setObjectName("titleLabel")
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi(registerForm)
+        QtCore.QMetaObject.connectSlotsByName(registerForm)
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self, registerForm):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.loginPageLabel.setText(_translate("Form", "REGISTER PAGE"))
-        self.usernameRegLabel.setText(_translate("Form", "Username"))
-        self.passwordRegLabel.setText(_translate("Form", "Password"))
-        self.regButton.setText(_translate("Form", "Register"))
-        self.passwordRegLabel_2.setText(_translate("Form", "Confirmed Password"))
-        self.titleLabel.setText(_translate("Form", "APU Workspace@Facial Emotion Recognition System"))
+        registerForm.setWindowTitle(_translate("registerForm", "Form"))
+        self.loginPageLabel.setText(_translate("registerForm", "REGISTER PAGE"))
+        self.usernameRegLabel.setText(_translate("registerForm", "Username"))
+        self.passwordRegLabel.setText(_translate("registerForm", "Password"))
+        self.regButton.setText(_translate("registerForm", "Register"))
+        self.passwordRegLabel_2.setText(_translate("registerForm", "Confirmed Password"))
+        self.titleLabel.setText(_translate("registerForm", "APU Workspace@Facial Emotion Recognition System"))
 from UI import res
