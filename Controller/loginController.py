@@ -1,6 +1,5 @@
 from UI.Login import *
 from UI.register import *
-from Controller.my_main_window import MyMainWindow
 from PyQt5.QtWidgets import (
     QApplication,
     QMainWindow,
@@ -9,7 +8,7 @@ from PyQt5.QtWidgets import (
     QTableWidgetItem,
     QMessageBox,
 )
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import QObject, pyqtSignal
 from app_data import AppData
 from enums import Pages
 import pandas as pd
@@ -21,19 +20,23 @@ class userDAO:
     def get_data(self):
         return pd.read_csv(self.csv_path)
 
-class LoginController(MyMainWindow):
+class LoginController(QWidget):
     def __init__(self, router):
         self.ui = Ui_loginForm()
-        super().__init__(self.ui, router)
+        super().__init__(parent=None)
+        self.ui.setupUi(self)
 
         self.userDao = userDAO()
         self.data = self.userDao.get_data()
 
         self.ui.loginButton.clicked.connect(self.login)
-        self.ui.registerButton.clicked.connect(self.register)
+        self.ui.registerButton.clicked.connect(self.go_register)
+
+        self.reg_Ui = Ui_registerForm()
+        self.regPage = QWidget()
 
     def login(self):
-        # Get the input values from the login form
+        # Get the input values from the login form  
         username = self.ui.usernameInput.text()
         password = self.ui.passwordInput.text()
 
@@ -66,3 +69,7 @@ class LoginController(MyMainWindow):
             message_box.setIcon(QtWidgets.QMessageBox.Warning)
             message_box.setText("Invalid username or password.")
             message_box.exec_()
+    
+    def go_register(self):
+        self.reg_Ui.setupUi(self.regPage)
+        print("1")

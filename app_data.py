@@ -6,8 +6,6 @@ class AppData(object):
     _instance = None
     router = None
 
-    manual_inspection_glove_type = ""
-
     def __new__(cls):
         if cls._instance is None:
             print("creating new AppData instance")

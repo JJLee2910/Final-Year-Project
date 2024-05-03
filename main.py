@@ -1,27 +1,28 @@
-import os
 import sys
-
 from PyQt5.QtCore import Qt
 from UI.Login import *
 from UI.register import *
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
-from app_data import AppData
-from enums import Pages
 from Controller import (
     loginController,
-    registerController
+    registerController,
 )
-from UI.register import Ui_Form
-
+from app_data import AppData
+from enums import Pages
 
 def add_pages(router):
-    data = AppData
+    data = AppData()
     data.router = router
 
-    loginPage = loginController.LoginController(router)
-    router.addWidget(loginPage)
-    data.loginPage = loginPage
-    
+    login_page = loginController.LoginController(router)
+    router.addWidget(login_page)
+    data.login_page = login_page
+
+    register_page = registerController.RegisterController(router)
+    router.addWidget(register_page)
+    data.register_page = register_page
+
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
