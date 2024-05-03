@@ -6,17 +6,23 @@ from UI.Login import *
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
 from app_data import AppData
 from enums import Pages
+from Controller import (
+    loginController,
+)
 
-class MyMainWindow(QWidget):
-    def __init__(self, parent=None):
-        super(MyMainWindow, self).__init__(parent)
-        self.ui = Ui_loginForm()
-        self.ui.setupUi(self)
+def add_pages(router):
+    data = AppData
+    data.router = router
 
-        # create instance of the UI form
+    loginPage = loginController.LoginController(router)
+    router.addWidget(loginPage)
+    data.loginPage = loginPage
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = MyMainWindow()
-    window.show()
+    router = QtWidgets.QStackedWidget()
+    add_pages(router)
+    router.setGeometry(100, 100, 996, 700)
+    router.setCurrentIndex(Pages.LOGIN.value)
+    router.show()
     sys.exit(app.exec_())
