@@ -62,7 +62,6 @@ class LoginController(QWidget):
             message_box.setText("Login successful!")
             message_box.exec_()
             # Perform any additional actions after successful login
-            # For example, navigate to the main window or perform other operations
             # self.router.navigate(Pages.MAIN_WINDOW)
         else:
             # Login failed
