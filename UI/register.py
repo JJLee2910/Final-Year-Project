@@ -11,12 +11,14 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_registerForm(object):
-    def setupUi(self, registerForm):
-        registerForm.setObjectName("registerForm")
-        registerForm.resize(750, 623)
-        self.regPageWidget = QtWidgets.QWidget(registerForm)
-        self.regPageWidget.setGeometry(QtCore.QRect(80, 170, 591, 421))
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(800, 600)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.regPageWidget = QtWidgets.QWidget(self.centralwidget)
+        self.regPageWidget.setGeometry(QtCore.QRect(91, 150, 591, 421))
         self.regPageWidget.setObjectName("regPageWidget")
         self.usernameRegInput = QtWidgets.QLineEdit(self.regPageWidget)
         self.usernameRegInput.setGeometry(QtCore.QRect(40, 110, 509, 20))
@@ -68,8 +70,8 @@ class Ui_registerForm(object):
         self.passwordRegInput_2.setText("")
         self.passwordRegInput_2.setEchoMode(QtWidgets.QLineEdit.Password)
         self.passwordRegInput_2.setObjectName("passwordRegInput_2")
-        self.loginWidget = QtWidgets.QWidget(registerForm)
-        self.loginWidget.setGeometry(QtCore.QRect(79, 30, 591, 131))
+        self.loginWidget = QtWidgets.QWidget(self.centralwidget)
+        self.loginWidget.setGeometry(QtCore.QRect(90, 10, 591, 131))
         self.loginWidget.setObjectName("loginWidget")
         self.logoLabel = QtWidgets.QLabel(self.loginWidget)
         self.logoLabel.setGeometry(QtCore.QRect(20, 10, 101, 111))
@@ -87,17 +89,21 @@ class Ui_registerForm(object):
         self.titleLabel.setTextFormat(QtCore.Qt.RichText)
         self.titleLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.titleLabel.setObjectName("titleLabel")
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
 
-        self.retranslateUi(registerForm)
-        QtCore.QMetaObject.connectSlotsByName(registerForm)
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    def retranslateUi(self, registerForm):
+    def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        registerForm.setWindowTitle(_translate("registerForm", "Form"))
-        self.loginPageLabel.setText(_translate("registerForm", "REGISTER PAGE"))
-        self.usernameRegLabel.setText(_translate("registerForm", "Username"))
-        self.passwordRegLabel.setText(_translate("registerForm", "Password"))
-        self.regButton.setText(_translate("registerForm", "Register"))
-        self.passwordRegLabel_2.setText(_translate("registerForm", "Confirmed Password"))
-        self.titleLabel.setText(_translate("registerForm", "APU Workspace@Facial Emotion Recognition System"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.loginPageLabel.setText(_translate("MainWindow", "REGISTER PAGE"))
+        self.usernameRegLabel.setText(_translate("MainWindow", "Username"))
+        self.passwordRegLabel.setText(_translate("MainWindow", "Password"))
+        self.regButton.setText(_translate("MainWindow", "Register"))
+        self.passwordRegLabel_2.setText(_translate("MainWindow", "Confirmed Password"))
+        self.titleLabel.setText(_translate("MainWindow", "APU Workspace@Facial Emotion Recognition System"))
 from UI import res

@@ -1,4 +1,4 @@
-from UI.register import Ui_registerForm
+from UI.register import Ui_MainWindow
 from PyQt5.QtWidgets import (
     QApplication,
     QMainWindow,
@@ -8,16 +8,15 @@ from PyQt5.QtWidgets import (
     QMessageBox,
 )
 from PyQt5.QtCore import Qt
-from app_data import AppData
-from enums import Pages
 import pandas as pd
 from Controller.loginController import userDAO
 
-class RegisterController(QWidget):
-    def __init__(self, router):
-        self.ui = Ui_registerForm()
-        super().__init__(parent=None)
+class RegisterController(QMainWindow):
+    def __init__(self, router : QStackedWidget):
+        super(RegisterController, self).__init__()
+        self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.router = router
 
         self.userDao = userDAO()
         self.data = self.userDao.get_data()
@@ -61,4 +60,4 @@ class RegisterController(QWidget):
         message_box.setText("Registration successful!")
         message_box.exec_()
 
-        # self.router.navigate(Pages.LOGIN)
+        self.router.setCurrentIndex(0)

@@ -11,31 +11,14 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_loginForm(object):
-    def setupUi(self, loginForm):
-        loginForm.setObjectName("loginForm")
-        loginForm.resize(625, 567)
-        self.loginWidget = QtWidgets.QWidget(loginForm)
-        self.loginWidget.setGeometry(QtCore.QRect(19, 30, 591, 131))
-        self.loginWidget.setObjectName("loginWidget")
-        self.logoLabel = QtWidgets.QLabel(self.loginWidget)
-        self.logoLabel.setGeometry(QtCore.QRect(20, 10, 101, 111))
-        self.logoLabel.setStyleSheet("border-image: url(:/images/Icons/Logo-APU-200.png);\n"
-"")
-        self.logoLabel.setText("")
-        self.logoLabel.setObjectName("logoLabel")
-        self.titleLabel = QtWidgets.QLabel(self.loginWidget)
-        self.titleLabel.setGeometry(QtCore.QRect(130, 20, 411, 91))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        font.setBold(True)
-        font.setWeight(75)
-        self.titleLabel.setFont(font)
-        self.titleLabel.setTextFormat(QtCore.Qt.RichText)
-        self.titleLabel.setAlignment(QtCore.Qt.AlignCenter)
-        self.titleLabel.setObjectName("titleLabel")
-        self.loginPageWidget = QtWidgets.QWidget(loginForm)
-        self.loginPageWidget.setGeometry(QtCore.QRect(20, 170, 591, 381))
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(673, 600)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.loginPageWidget = QtWidgets.QWidget(self.centralwidget)
+        self.loginPageWidget.setGeometry(QtCore.QRect(41, 160, 591, 381))
         self.loginPageWidget.setObjectName("loginPageWidget")
         self.usernameInput = QtWidgets.QLineEdit(self.loginPageWidget)
         self.usernameInput.setGeometry(QtCore.QRect(40, 110, 509, 20))
@@ -76,26 +59,40 @@ class Ui_loginForm(object):
         self.loginButton = QtWidgets.QPushButton(self.loginPageWidget)
         self.loginButton.setGeometry(QtCore.QRect(440, 310, 101, 41))
         self.loginButton.setObjectName("loginButton")
+        self.loginWidget = QtWidgets.QWidget(self.centralwidget)
+        self.loginWidget.setGeometry(QtCore.QRect(40, 20, 591, 131))
+        self.loginWidget.setObjectName("loginWidget")
+        self.logoLabel = QtWidgets.QLabel(self.loginWidget)
+        self.logoLabel.setGeometry(QtCore.QRect(20, 10, 101, 111))
+        self.logoLabel.setStyleSheet("border-image: url(:/images/Icons/Logo-APU-200.png);\n"
+"")
+        self.logoLabel.setText("")
+        self.logoLabel.setObjectName("logoLabel")
+        self.titleLabel = QtWidgets.QLabel(self.loginWidget)
+        self.titleLabel.setGeometry(QtCore.QRect(130, 20, 411, 91))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.titleLabel.setFont(font)
+        self.titleLabel.setTextFormat(QtCore.Qt.RichText)
+        self.titleLabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.titleLabel.setObjectName("titleLabel")
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
 
-        self.retranslateUi(loginForm)
-        QtCore.QMetaObject.connectSlotsByName(loginForm)
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    def retranslateUi(self, loginForm):
+    def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        loginForm.setWindowTitle(_translate("loginForm", "Form"))
-        self.titleLabel.setText(_translate("loginForm", "APU Workspace@Facial Emotion Recognition System"))
-        self.loginPageLabel.setText(_translate("loginForm", "LOGIN PAGE"))
-        self.usernameLabel.setText(_translate("loginForm", "Username"))
-        self.passwordLabel.setText(_translate("loginForm", "Password"))
-        self.registerButton.setText(_translate("loginForm", "Register"))
-        self.loginButton.setText(_translate("loginForm", "Login"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.loginPageLabel.setText(_translate("MainWindow", "LOGIN PAGE"))
+        self.usernameLabel.setText(_translate("MainWindow", "Username"))
+        self.passwordLabel.setText(_translate("MainWindow", "Password"))
+        self.registerButton.setText(_translate("MainWindow", "Register"))
+        self.loginButton.setText(_translate("MainWindow", "Login"))
+        self.titleLabel.setText(_translate("MainWindow", "APU Workspace@Facial Emotion Recognition System"))
 from UI import res
-
-# if __name__ == "__main__":
-#     import sys
-#     app = QtWidgets.QApplication(sys.argv)
-#     MainWindow = QtWidgets.QWidget()
-#     ui = Ui_loginForm()
-#     ui.setupUi(MainWindow)
-#     MainWindow.show()
-#     sys.exit(app.exec_())
