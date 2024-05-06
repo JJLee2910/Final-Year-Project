@@ -18,18 +18,35 @@ class DashboardController(QMainWindow):
         self.ui.detectButton.clicked.connect(self.startDetection)
         self.ui.logoutButton.clicked.connect(self.logout)
 
+        self.video = None
+
     def startDetection(self):
         print("detection started")
-        video = cv.VideoCapture(0)
+        self.video = cv.VideoCapture(0)
 
         while(True):
-            ret, frame = video.read()
-            cv.imshow("Frame", frame)
+            ret, frame = self.video.read()
+            if not ret:
+                print("Error: Failed to capture frame")
+                break
+            
+            if frame is not None and frame.shape[0] > 0 and frame.shape[1] > 0:
+                cv.imshow("Frame", frame)
+            else:
+                print("Error: Invalid frame dimensions")
+                break
+
             if cv.waitKey(1) & 0xFF == ord('q'):
                 break
-        video.release()
-        cv.destroyAllWindows()
+
+        if self.video is not None:
+            self.video.release()
+            cv.destroyAllWindows()  
     
     def logout(self):
         print("logout")
+        if self.video is not None:
+            self.video.release()
+            cv.destroyAllWindows()
         self.router.setCurrentIndex(0)
+        
