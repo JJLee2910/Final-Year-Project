@@ -58,6 +58,11 @@ class LoginController(QMainWindow):
             message_box.setIcon(QMessageBox.Information)
             message_box.setText("Login successful!")
             message_box.exec_()
+
+            # initialize the input field to empty
+            self.ui.usernameInput.setText("")
+            self.ui.passwordInput.setText("")
+
             # Perform any additional actions after successful login
             print("2")
             self.router.setCurrentIndex(2)

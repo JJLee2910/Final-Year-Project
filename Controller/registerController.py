@@ -60,4 +60,9 @@ class RegisterController(QMainWindow):
         message_box.setText("Registration successful!")
         message_box.exec_()
 
+        # intialize the input field to empty again
+        self.ui.usernameRegInput.setText("")
+        self.ui.passwordRegInput.setText("")
+        self.ui.passwordRegInput_2.setText("")
+
         self.router.setCurrentIndex(0)
