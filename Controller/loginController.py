@@ -29,8 +29,8 @@ class LoginController(QMainWindow):
         self.ui.loginButton.clicked.connect(self.login)
         self.ui.registerButton.clicked.connect(self.go_register)
 
-        print("Is self.router initialized?", self.router is not None)
-        print("Index of login page:", self.router.indexOf(self.ui.loginPageWidget))
+        # print("Is self.router initialized?", self.router is not None)
+        # print("Index of login page:", self.router.indexOf(self.ui.loginPageWidget))
 
     def login(self):
         # Get the input values from the login form  
