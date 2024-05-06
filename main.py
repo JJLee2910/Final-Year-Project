@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
 from Controller import (
     loginController,
     registerController,
+    dashboardController,
 )
 
 def add_pages(router):
@@ -15,6 +16,8 @@ def add_pages(router):
     register_page = registerController.RegisterController(router)
     router.addWidget(register_page)
 
+    dashboard_page = dashboardController.DashboardController(router)
+    router.addWidget(dashboard_page)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
