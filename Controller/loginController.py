@@ -59,7 +59,7 @@ class LoginController(QMainWindow):
             message_box.setText("Login successful!")
             message_box.exec_()
             # Perform any additional actions after successful login
-            print("1")
+            print("2")
             self.router.setCurrentIndex(2)
         else:
             # Login failed
@@ -69,4 +69,3 @@ class LoginController(QMainWindow):
     
     def go_register(self):
         self.router.setCurrentIndex(1)
-        print("Current index:", self.router.currentIndex())
