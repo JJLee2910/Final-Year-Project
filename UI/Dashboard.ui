@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="detectButton">
     <property name="geometry">
      <rect>
       <x>330</x>
@@ -25,6 +25,19 @@
     </property>
     <property name="text">
      <string>DETECT NOW</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>430</y>
+      <width>121</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>logout</string>
     </property>
    </widget>
   </widget>

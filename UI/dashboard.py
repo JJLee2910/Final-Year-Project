@@ -17,9 +17,12 @@ class Ui_MainWindow(object):
         MainWindow.resize(878, 642)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(330, 220, 201, 131))
-        self.pushButton.setObjectName("pushButton")
+        self.detectButton = QtWidgets.QPushButton(self.centralwidget)
+        self.detectButton.setGeometry(QtCore.QRect(330, 220, 201, 131))
+        self.detectButton.setObjectName("detectButton")
+        self.logoutButton = QtWidgets.QPushButton(self.centralwidget)
+        self.logoutButton.setGeometry(QtCore.QRect(360, 430, 121, 51))
+        self.logoutButton.setObjectName("logoutButton")
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -31,4 +34,5 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.pushButton.setText(_translate("MainWindow", "DETECT NOW"))
+        self.detectButton.setText(_translate("MainWindow", "DETECT NOW"))
+        self.logoutButton.setText(_translate("MainWindow", "logout"))
