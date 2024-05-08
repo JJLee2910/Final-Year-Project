@@ -57,8 +57,5 @@ class DashboardController(QMainWindow):
 
         self.ui.tableWidget.setRowCount(2)
         self.ui.tableWidget.setColumnCount(8)
-
-        self.ui.tableWidget.setItem(0,0, QTableWidgetItem("Emotions Classes"))
-        self.ui.tableWidget.setItem(0,1, QTableWidgetItem("Count"))
         pass
         
