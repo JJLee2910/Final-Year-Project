@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import (
     QStackedWidget,
     QTableWidget,
     QMessageBox,
+    QTableWidgetItem,
 )
 import cv2 as cv
 class DashboardController(QMainWindow):
@@ -17,6 +18,7 @@ class DashboardController(QMainWindow):
 
         self.ui.detectButton.clicked.connect(self.startDetection)
         self.ui.logoutButton.clicked.connect(self.logout)
+        self.create_table()
 
         self.video = None
 
@@ -55,5 +57,8 @@ class DashboardController(QMainWindow):
 
         self.ui.tableWidget.setRowCount(2)
         self.ui.tableWidget.setColumnCount(8)
+
+        self.ui.tableWidget.setItem(0,0, QTableWidgetItem("Emotions Classes"))
+        self.ui.tableWidget.setItem(0,1, QTableWidgetItem("Count"))
         pass
         

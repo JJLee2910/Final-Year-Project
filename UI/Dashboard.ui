@@ -49,6 +49,16 @@
       <height>401</height>
      </rect>
     </property>
+    <column>
+     <property name="text">
+      <string>Emotions Classes</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Counts</string>
+     </property>
+    </column>
    </widget>
    <widget class="QWidget" name="loginWidget" native="true">
     <property name="geometry">
