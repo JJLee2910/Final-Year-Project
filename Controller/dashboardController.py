@@ -70,6 +70,13 @@ class DashboardController(QMainWindow):
             )
             self.ui.tableWidget.setItem(row, 0, item)
 
+        emotions_count = []
+        for row in range(7):
+            item = QTableWidgetItem(emotions_count)
+            item.setFlags(
+                item.flags() ^ Qt.ItemIsEditable 
+            )
+            self.ui.tableWidget.setItem(row, 1, item)
         # Set size policy to expand horizontally and vertically
         self.ui.tableWidget.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
