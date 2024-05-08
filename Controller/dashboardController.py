@@ -57,7 +57,7 @@ class DashboardController(QMainWindow):
 
     def create_table(self):
         self.ui.tableWidget.setRowCount(7)  # 7 emotional classes
-        self.ui.tableWidget.setColumnCount(2)  # 8 columns
+        self.ui.tableWidget.setColumnCount(2)  # 2 columns
 
         # Set the emotional classes in the first column
         emotional_classes = ["Angry", "Happy", "Sad", "Surprised", "Disgusted", "Fearful", "Neutral"]
