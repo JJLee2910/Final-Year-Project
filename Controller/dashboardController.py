@@ -53,9 +53,12 @@ class DashboardController(QMainWindow):
         self.router.setCurrentIndex(0)
 
     def create_table(self):
-        self.ui.tableWidget = QTableWidget()
+        self.ui.tableWidget.setRowCount(7)  # 7 emotional classes
+        self.ui.tableWidget.setColumnCount(8)  # 8 columns
 
-        self.ui.tableWidget.setRowCount(2)
-        self.ui.tableWidget.setColumnCount(8)
-        pass
+        # Set the emotional classes in the first column
+        emotional_classes = ["Angry", "Happy", "Sad", "Surprised", "Disgusted", "Fearful", "Neutral"]
+        for row, emotion in enumerate(emotional_classes):
+            item = QTableWidgetItem(emotion)
+            self.ui.tableWidget.setItem(row, 0, item)
         
