@@ -21,7 +21,9 @@ class DashboardController(QMainWindow):
 
         self.ui.detectButton.clicked.connect(self.startDetection)
         self.ui.logoutButton.clicked.connect(self.logout)
+
         self.create_table()
+        self.load_chart()
 
         self.video = None
 
@@ -73,4 +75,7 @@ class DashboardController(QMainWindow):
 
         # Resize the columns to fit the contents
         self.ui.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+
+    def load_chart(self):
+        pass
         
