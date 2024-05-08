@@ -7,7 +7,10 @@ from PyQt5.QtWidgets import (
     QTableWidget,
     QMessageBox,
     QTableWidgetItem,
+    QSizePolicy,
+    QHeaderView,
 )
+from PyQt5.QtCore import Qt
 import cv2 as cv
 class DashboardController(QMainWindow):
     def __init__(self, router : QStackedWidget):
@@ -54,11 +57,20 @@ class DashboardController(QMainWindow):
 
     def create_table(self):
         self.ui.tableWidget.setRowCount(7)  # 7 emotional classes
-        self.ui.tableWidget.setColumnCount(8)  # 8 columns
+        self.ui.tableWidget.setColumnCount(2)  # 8 columns
 
         # Set the emotional classes in the first column
         emotional_classes = ["Angry", "Happy", "Sad", "Surprised", "Disgusted", "Fearful", "Neutral"]
         for row, emotion in enumerate(emotional_classes):
             item = QTableWidgetItem(emotion)
+            item.setFlags(
+                item.flags() ^ Qt.ItemIsEditable 
+            )
             self.ui.tableWidget.setItem(row, 0, item)
+
+        # Set size policy to expand horizontally and vertically
+        self.ui.tableWidget.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+
+        # Resize the columns to fit the contents
+        self.ui.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         
