@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import (
     QMainWindow,
     QWidget,
     QStackedWidget,
-    QTableWidgetItem,
+    QTableWidget,
     QMessageBox,
 )
 import cv2 as cv
@@ -49,4 +49,11 @@ class DashboardController(QMainWindow):
             self.video.release()
             cv.destroyAllWindows()
         self.router.setCurrentIndex(0)
+
+    def create_table(self):
+        self.ui.tableWidget = QTableWidget()
+
+        self.ui.tableWidget.setRowCount(2)
+        self.ui.tableWidget.setColumnCount(8)
+        pass
         
