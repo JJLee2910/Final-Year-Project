@@ -63,6 +63,9 @@ class DashboardController(QMainWindow):
 
         # Set the emotional classes in the first column
         emotional_classes = ["Angry", "Happy", "Sad", "Surprised", "Disgusted", "Fearful", "Neutral"]
+
+        # Store the count of each emotional classes detected from the detector
+
         for row, emotion in enumerate(emotional_classes):
             item = QTableWidgetItem(emotion)
             item.setFlags(
