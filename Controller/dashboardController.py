@@ -73,9 +73,9 @@ class DashboardController(QMainWindow):
             )
             self.ui.tableWidget.setItem(row, 0, item)
 
-        emotions_count = []
+        # emotions_count = []
         for row in range(7):
-            item = QTableWidgetItem(emotions_count)
+            item = QTableWidgetItem("")
             item.setFlags(
                 item.flags() ^ Qt.ItemIsEditable 
             )
