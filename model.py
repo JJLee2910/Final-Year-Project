@@ -1,5 +1,7 @@
-from keras.layers import Conv2D,Flatten,MaxPooling2D,Input,BatchNormalization,Dropout,Dense
+from keras.layers import Conv2D, Flatten, MaxPooling2D, Input, BatchNormalization, Dropout, Dense, Reshape, Permute, Lambda
 from keras.models import Model
+import tensorflow as tf
+
 def create_model(input_shape = (48,48,1),num_classes=7):
 
     input = Input(shape=input_shape)
@@ -29,6 +31,33 @@ def create_model(input_shape = (48,48,1),num_classes=7):
 
     x = MaxPooling2D(pool_size=(2,2))(x)
     x = Dropout(0.4)(x)
+
+    # Multi-head self-attention
+    def multi_head_self_attention(x):
+        num_channels = tf.shape(x)[-1]
+        num_heads = num_channels // num_heads
+        queries = Dense(num_heads * num_channels)(x)
+        keys = Dense(num_heads * num_channels)(x)
+        values = Dense(num_heads * num_channels)(x)
+
+        queries = Reshape((-1, num_heads, num_channels // num_heads))(queries)
+        keys = Reshape((-1, num_heads, num_channels // num_heads))(keys)
+        values = Reshape((-1, num_heads, num_channels // num_heads))(values)
+
+        queries = Permute((2, 1, 3))(queries)
+        keys = Permute((2, 3, 1))(keys)
+        values = Permute((2, 1, 3))(values)
+
+        attention_scores = Lambda(lambda a: tf.matmul(a[0], a[1]) / tf.math.sqrt(tf.cast(num_channels // num_heads, tf.float32)))([queries, keys])
+        attention_weights = Lambda(lambda a: tf.nn.softmax(a, axis=-1))(attention_scores)
+
+        output = Lambda(lambda a: tf.matmul(a[0], a[1]))([attention_weights, values])
+        output = Permute((2, 1, 3))(output)
+        output = Reshape((-1, num_channels))(output)
+
+        return output
+
+    x = multi_head_self_attention(x)
 
     x = Flatten()(x)
 
