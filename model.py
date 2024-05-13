@@ -2,7 +2,7 @@ from keras.layers import Conv2D, Flatten, MaxPooling2D, Input, BatchNormalizatio
 from keras.models import Model
 import tensorflow as tf
 
-def create_model(input_shape = (48,48,1),num_classes=7):
+def create_model(input_shape = (48,48,1),num_classes=7, num_heads=8):
 
     input = Input(shape=input_shape)
     x = Conv2D(filters=256,kernel_size=(3,3),activation='relu',padding='same')(input)
