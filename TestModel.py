@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
-from tensorflow.keras.models import load_model
+from tensorflow import keras
+from keras.models import load_model
 from model import create_model
 
 emotion_dict = {0: "Angry", 1: "Disgusted", 2: "Fearful", 3: "Happy", 4: "Neutral", 5: "Sad", 6: "Surprised"}
@@ -9,7 +10,7 @@ num_classes = 7
 emotion_model = create_model(num_classes=num_classes)
 
 # load weights into new model
-emotion_model.load_weights("Opt_Model/model_svm.h5")
+emotion_model.load_weights("Opt_Model/model_v2.h5")
 print("Loaded model from disk")
 
 # start the webcam feed
