@@ -1,6 +1,5 @@
 from keras.layers import (Conv2D, Flatten, MaxPooling2D, Input, 
-                                            BatchNormalization, Dropout, Dense, 
-                                            Reshape, Permute, Lambda, DepthwiseConv2D, GlobalAveragePooling2D)
+                                            BatchNormalization, Dropout, Dense)
 from keras.models import Model
 import tensorflow as tf
 
