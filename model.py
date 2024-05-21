@@ -1,7 +1,7 @@
-from tensorflow.python.keras.layers import (Conv2D, Flatten, MaxPooling2D, Input, 
+from keras.layers import (Conv2D, Flatten, MaxPooling2D, Input, 
                                             BatchNormalization, Dropout, Dense, 
                                             Reshape, Permute, Lambda, DepthwiseConv2D, GlobalAveragePooling2D)
-from tensorflow.python.keras.models import Model
+from keras.models import Model
 import tensorflow as tf
 
 def create_model(input_shape = (48,48,1),num_classes=7, num_heads=8):
