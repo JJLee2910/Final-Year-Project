@@ -11,7 +11,10 @@ from PyQt5.QtWidgets import (
     QHeaderView,
 )
 from PyQt5.QtCore import Qt
+from PyQt5.QtChart import QChart, QChartView, QBarSet, QBarSeries, QBarCategoryAxis
 import cv2 as cv
+import random
+
 class DashboardController(QMainWindow):
     def __init__(self, router : QStackedWidget):
         super(DashboardController, self).__init__()
@@ -62,11 +65,11 @@ class DashboardController(QMainWindow):
         self.ui.tableWidget.setColumnCount(2)  # 2 columns
 
         # Set the emotional classes in the first column
-        emotional_classes = ["Angry", "Happy", "Sad", "Surprised", "Disgusted", "Fearful", "Neutral"]
+        self.emotional_classes = ["Angry", "Happy", "Sad", "Surprised", "Disgusted", "Fearful", "Neutral"]
 
         # Store the count of each emotional classes detected from the detector
 
-        for row, emotion in enumerate(emotional_classes):
+        for row, emotion in enumerate(self.emotional_classes):
             item = QTableWidgetItem(emotion)
             item.setFlags(
                 item.flags() ^ Qt.ItemIsEditable 
@@ -87,5 +90,24 @@ class DashboardController(QMainWindow):
         self.ui.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
     def load_chart(self):
+        # emotional monthly count chart
+        self.chart = QChart()
+
+        # get each emotion class count of the month
+        self.series = QBarSeries()
+        self.bar_set = QBarSet("Emotions")
+
+        # Initialize the bar set with zero values
+        self.bar_set.append([0] * len(self.emotional_classes))
+        self.series.append(self.bar_set)
+        self.chart.addSeries(self.series)
+
+        # add emotions categories to the bar set
+        axis_x = QBarCategoryAxis()
+        axis_x.append(self.emotional_classes)
+        self.chart.addAxis(axis_x, Qt.AlignBottom)
+
+        
+        # refresh every month
         pass
         
