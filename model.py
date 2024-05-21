@@ -1,5 +1,7 @@
-from keras.layers import Conv2D, Flatten, MaxPooling2D, Input, BatchNormalization, Dropout, Dense, Reshape, Permute, Lambda
-from keras.models import Model
+from tensorflow.python.keras.layers import (Conv2D, Flatten, MaxPooling2D, Input, 
+                                            BatchNormalization, Dropout, Dense, 
+                                            Reshape, Permute, Lambda, DepthwiseConv2D, GlobalAveragePooling2D)
+from tensorflow.python.keras.models import Model
 import tensorflow as tf
 
 def create_model(input_shape = (48,48,1),num_classes=7, num_heads=8):
@@ -69,6 +71,39 @@ def create_model(input_shape = (48,48,1),num_classes=7, num_heads=8):
 
     return Model(input,x,name='fer_model')
 
+# multi-branch attention cnn
+# def create_model(input_shape=(48, 48, 1), num_classes=7):
+#     input = Input(shape=input_shape)
+    
+#     x = Conv2D(filters=64, kernel_size=(3,3), strides=1, activation='relu', padding='same')(input)
+
+#     x = Conv2D(filters=64, kernel_size=(3,3), strides=1, activation='relu', padding='same')(x)
+
+#     x = Conv2D(filters=128, kernel_size=(3,3), activation='relu', padding='same')(x)
+
+#     x = Conv2D(filters=128, kernel_size=(3,3), strides=2, activation='relu', padding='same')(x)
+
+#     x = Conv2D(filters=512, kernel_size=(3,3), strides=2, activation='relu', padding='same')(x)
+
+#     x = Conv2D(filters=256, kernel_size=(3,3), activation='relu', padding='same')(x)
+
+#     x = Conv2D(filters=512, kernel_size=(1,1), strides=2, activation='relu', padding='same')(x)
+
+#     x = Conv2D(filters=512, kernel_size=(3,3), activation='relu', padding='same')(x)
+
+#     x = DepthwiseConv2D(kernel_size=(3, 3), padding='same', activation='relu')(x)
+#     x = Conv2D(filters=1024, kernel_size=(1, 1), activation='relu', padding='same')(x)
+
+#     x = DepthwiseConv2D(kernel_size=(3, 3), padding='same', activation='relu')(x)
+#     x = Conv2D(filters=1024, kernel_size=(1, 1), activation='relu', padding='same')(x)
+
+#     x = GlobalAveragePooling2D()(x)
+
+#     x = Dense(1024, activation='relu')(x)
+
+#     output = Dense(num_classes, activation='softmax')(x)
+
+#     return Model(input, output, name='fer2013')
 
 if __name__=='__main__':
     model = create_model()
