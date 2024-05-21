@@ -9,9 +9,11 @@ from PyQt5.QtWidgets import (
     QTableWidgetItem,
     QSizePolicy,
     QHeaderView,
+    QVBoxLayout
 )
 from PyQt5.QtCore import Qt
 from PyQt5.QtChart import QChart, QChartView, QBarSet, QBarSeries, QBarCategoryAxis
+from PyQt5.QtGui import QPainter
 import cv2 as cv
 import random
 
@@ -106,8 +108,42 @@ class DashboardController(QMainWindow):
         axis_x = QBarCategoryAxis()
         axis_x.append(self.emotional_classes)
         self.chart.addAxis(axis_x, Qt.AlignBottom)
+        self.series.attachAxis(axis_x)
 
-        
-        # refresh every month
-        pass
-        
+        # Create the chart view and add the chart to it
+        self.chart_view = QChartView(self.chart)
+        self.chart_view.setRenderHint(QPainter.Antialiasing)
+
+        # Find the layout within the chart_widget
+        chart_layout = self.ui.chart_widget.findChild(QVBoxLayout)
+        if chart_layout is not None:
+            # Remove any existing widgets from the layout
+            while chart_layout.count():
+                item = chart_layout.takeAt(0)
+                if item.widget():
+                    item.widget().deleteLater()
+
+            # Set the size policy of the chart view to expand
+            self.chart_view.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+
+            # Add the chart view to the layout
+            chart_layout.addWidget(self.chart_view)
+        else:
+            print("Could not find the layout within the chart_widget")
+
+        self.update_chart()
+
+    def update_chart(self):
+        # Generate some random data for the chart
+        counts = [random.randint(0, 100) for _ in self.emotional_classes]
+
+        # Update the table with the new data
+        for row, count in enumerate(counts):
+            self.ui.tableWidget.item(row, 1).setText(str(count))
+
+        # Update the bar set with the new data
+        for i, count in enumerate(counts):
+            self.bar_set.replace(i, count)
+
+        # Refresh the chart
+        self.chart_view.repaint()
