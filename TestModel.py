@@ -9,13 +9,14 @@ emotion_dict = {0: "Angry", 1: "Disgusted", 2: "Fearful", 3: "Happy", 4: "Neutra
 num_classes = 8
 emotion_model = create_model(num_classes=num_classes)
 
+# extracting features from the image
 def extract_features(image):
     feature = np.array(image)
     feature = feature.reshape(1, 48, 48, 1)
     return feature / 255.0
 
 # load weights into new model
-emotion_model.load_weights("Opt_Model/model_v3.h5")
+emotion_model.load_weights("Opt_Model/model_v4.h5")
 print("Loaded model from disk")
 
 face_cascade = cv2.CascadeClassifier('haarcascades/haarcascade_frontalface_default.xml')
@@ -37,9 +38,8 @@ while True:
         img = extract_features(image)
         # predict the emotions
         emotion_prediction = emotion_model.predict(img)
-        maxindex = int(np.argmax(emotion_prediction))
         emotion_prob = np.max(emotion_prediction)
-        emotion_text = f"{emotion_dict[maxindex]}: {emotion_prob:.2f}"
+        emotion_text = f"{emotion_dict[emotion_prediction.argmax()]}: {emotion_prob:.2f}"
         cv2.putText(frame, emotion_text, (x+5, y-20), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)
 
     cv2.imshow('Emotion Detection', frame)
