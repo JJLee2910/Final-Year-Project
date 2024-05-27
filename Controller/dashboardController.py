@@ -13,7 +13,6 @@ from PyQt5.QtWidgets import (
     QLabel
 )
 from PyQt5.QtCore import Qt
-from PyQt5.QtChart import QChart, QChartView, QBarSet, QBarSeries, QBarCategoryAxis
 from PyQt5.QtGui import QPainter, QPixmap, QImage
 import cv2 as cv
 import random
