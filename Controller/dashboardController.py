@@ -9,16 +9,17 @@ from PyQt5.QtWidgets import (
     QTableWidgetItem,
     QSizePolicy,
     QHeaderView,
-    QVBoxLayout
+    QVBoxLayout,
+    QLabel
 )
 from PyQt5.QtCore import Qt
 from PyQt5.QtChart import QChart, QChartView, QBarSet, QBarSeries, QBarCategoryAxis
-from PyQt5.QtGui import QPainter
+from PyQt5.QtGui import QPainter, QPixmap, QImage
 import cv2 as cv
 import random
 
 class DashboardController(QMainWindow):
-    def __init__(self, router : QStackedWidget):
+    def __init__(self, router: QStackedWidget):
         super(DashboardController, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -28,22 +29,25 @@ class DashboardController(QMainWindow):
         self.ui.logoutButton.clicked.connect(self.logout)
 
         self.create_table()
-        self.load_chart()
 
         self.video = None
+
+        # Add QLabel for displaying video frames
+        self.video_label = QLabel(self.ui.chart_frame)
+        self.video_label.setAlignment(Qt.AlignCenter)
 
     def startDetection(self):
         print("detection started")
         self.video = cv.VideoCapture(0)
 
-        while(True):
+        while True:
             ret, frame = self.video.read()
             if not ret:
                 print("Error: Failed to capture frame")
                 break
-            
+
             if frame is not None and frame.shape[0] > 0 and frame.shape[1] > 0:
-                cv.imshow("Frame", frame)
+                self.display_frame(frame)
             else:
                 print("Error: Invalid frame dimensions")
                 break
@@ -53,8 +57,22 @@ class DashboardController(QMainWindow):
 
         if self.video is not None:
             self.video.release()
-            cv.destroyAllWindows()  
-    
+            cv.destroyAllWindows()
+
+    def display_frame(self, frame):
+        """Display frame in the QLabel"""
+        rgb_image = cv.cvtColor(frame, cv.COLOR_BGR2RGB)
+        h, w, ch = rgb_image.shape
+        bytes_per_line = ch * w
+        convert_to_Qt_format = QImage(rgb_image.data, w, h, bytes_per_line, QImage.Format_RGB888)
+        qt_img = QPixmap.fromImage(convert_to_Qt_format)
+
+        chart_frame_size = self.ui.chart_frame.size()
+        scaled_img = qt_img.scaled(chart_frame_size, Qt.KeepAspectRatio)
+        
+        self.video_label.setGeometry(0, 0, chart_frame_size.width(), chart_frame_size.height())
+        self.video_label.setPixmap(scaled_img)
+
     def logout(self):
         print("logout")
         if self.video is not None:
