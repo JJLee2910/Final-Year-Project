@@ -17,6 +17,9 @@ from PyQt5.QtChart import QChart, QChartView, QBarSet, QBarSeries, QBarCategoryA
 from PyQt5.QtGui import QPainter, QPixmap, QImage
 import cv2 as cv
 import random
+import numpy as np
+from model import create_model
+from keras.models import load_model
 
 class DashboardController(QMainWindow):
     def __init__(self, router: QStackedWidget):
@@ -29,12 +32,25 @@ class DashboardController(QMainWindow):
         self.ui.logoutButton.clicked.connect(self.logout)
 
         self.create_table()
+        self.loadModel()
 
         self.video = None
 
         # Add QLabel for displaying video frames
         self.video_label = QLabel(self.ui.chart_frame)
         self.video_label.setAlignment(Qt.AlignCenter)
+
+        self.faca_cascade = cv.CascadeClassifier('haarcascades/haarcascade_frontalface_default.xml')
+
+    def extractFeatures(self):
+        self.feature = np.array(self.image)
+        self.feature = self.feature.reshape(1, 48, 48, 1)
+        return self.feature / 255.0
+    
+    def loadModel(self):
+        self.emotional_model = create_model(num_classes=8)
+        self.emotional_model.load_weights("Opt_Model/model_v3.h5")
+        print("Model loading from disk")
 
     def startDetection(self):
         print("detection started")
