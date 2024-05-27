@@ -33,10 +33,10 @@ def create_model(input_shape = (48,48,1),num_classes=8):
     x = BatchNormalization()(x)
     x = Dropout(0.3)(x)
     
-    x = Flatten()(x)
-    x = Dense(512,activation='relu')(x)
-    x = BatchNormalization()(x)
-    x = Dropout(0.3)(x)
+    # x = Flatten()(x)
+    # x = Dense(512,activation='relu')(x)
+    # x = BatchNormalization()(x)
+    # x = Dropout(0.3)(x)
     
     x = Dense(num_classes,activation='softmax')(x)
 

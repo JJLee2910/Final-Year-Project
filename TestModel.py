@@ -16,7 +16,7 @@ def extract_features(image):
     return feature / 255.0
 
 # load weights into new model
-emotion_model.load_weights("Opt_Model/model_v4.h5")
+emotion_model.load_weights("Opt_Model/model_v3.h5")
 print("Loaded model from disk")
 
 face_cascade = cv2.CascadeClassifier('haarcascades/haarcascade_frontalface_default.xml')
