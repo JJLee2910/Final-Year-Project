@@ -4,7 +4,7 @@ from tensorflow import keras
 from keras.models import load_model # type: ignore
 from model import create_model
 
-emotion_dict = {0: "Angry", 1: "Disgusted", 2: "Fearful", 3: "Happy", 4: "Neutral", 5: "Sad", 6: "Surprised", 7:"Contempt"}
+emotion_dict = {0: "Angry", 1: "Contempt", 2: "Disgust", 3: "Fear", 4: "Happy", 5: "Neutral", 6: "Sad", 7:"Surprise"}
 
 num_classes = 8
 emotion_model = create_model(num_classes=num_classes)
@@ -16,7 +16,7 @@ def extract_features(image):
     return feature / 255.0
 
 # load weights into new model
-emotion_model.load_weights("Opt_Model/model_v3.h5")
+emotion_model.load_weights("Model/Optimized Model 2/model_v3.h5")
 print("Loaded model from disk")
 
 face_cascade = cv2.CascadeClassifier('haarcascades/haarcascade_frontalface_default.xml')
