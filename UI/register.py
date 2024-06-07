@@ -68,7 +68,7 @@ class Ui_MainWindow(object):
         self.passwordRegInput_2.setEchoMode(QtWidgets.QLineEdit.Password)
         self.passwordRegInput_2.setObjectName("passwordRegInput_2")
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.regPageWidget)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(10, 340, 571, 80))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(40, 340, 511, 80))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         self.buttonLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.buttonLayout.setContentsMargins(0, 0, 0, 0)

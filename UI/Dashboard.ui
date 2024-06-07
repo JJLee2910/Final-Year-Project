@@ -27,7 +27,7 @@
      <string>Start Detection</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="logoutButton">
     <property name="geometry">
      <rect>
       <x>280</x>
@@ -167,24 +167,7 @@
            <property name="frameShadow">
             <enum>QFrame::Raised</enum>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_7">
-            <item alignment="Qt::AlignTop">
-             <widget class="QLabel" name="defect_chart_labe">
-              <property name="font">
-               <font>
-                <weight>75</weight>
-                <bold>true</bold>
-               </font>
-              </property>
-              <property name="text">
-               <string>Monthly Emotional Classes Count</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-           </layout>
+           <layout class="QVBoxLayout" name="verticalLayout_7"/>
           </widget>
          </item>
          <item>

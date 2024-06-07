@@ -54,7 +54,7 @@ class Ui_MainWindow(object):
         self.passwordLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.passwordLabel.setObjectName("passwordLabel")
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.loginPageWidget)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(9, 299, 561, 61))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(39, 299, 511, 61))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         self.buttonLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.buttonLayout.setContentsMargins(0, 0, 0, 0)
@@ -101,5 +101,4 @@ class Ui_MainWindow(object):
         self.registerButton.setText(_translate("MainWindow", "Register"))
         self.loginButton.setText(_translate("MainWindow", "Login"))
         self.titleLabel.setText(_translate("MainWindow", "APU Workspace@Facial Emotion Recognition System"))
-
 from UI import res
