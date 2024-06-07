@@ -22,6 +22,7 @@ class RegisterController(QMainWindow):
         self.data = self.userDao.get_data()
 
         self.ui.regButton.clicked.connect(self.submit)
+        self.ui.backButton.clicked.connect(self.toLogin)
 
     def submit(self):
         # initialize input values from the form
@@ -65,4 +66,7 @@ class RegisterController(QMainWindow):
         self.ui.passwordRegInput.setText("")
         self.ui.passwordRegInput_2.setText("")
 
+        self.router.setCurrentIndex(0)
+
+    def toLogin(self):
         self.router.setCurrentIndex(0)
