@@ -9,13 +9,14 @@ from PyQt5.QtWidgets import (
     QHeaderView,
     QVBoxLayout,
     QLabel,
-    QFileDialog
+    QMessageBox
 )
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPainter, QPixmap, QImage
 import cv2 as cv
 import numpy as np
 import os
+import datetime
 from model import create_model
 
 class DashboardController(QMainWindow):
@@ -41,6 +42,9 @@ class DashboardController(QMainWindow):
         layout.addWidget(self.video_label)
 
         self.face_cascade = cv.CascadeClassifier('haarcascades/haarcascade_frontalface_default.xml')
+
+        self.current_frame = None
+        self.detected_emotion = None
 
     def extractFeatures(self, image):
         feature = np.array(image)
@@ -87,8 +91,8 @@ class DashboardController(QMainWindow):
             features = self.extractFeatures(roi_gray)
             emotion_prediction = self.emotional_model.predict(features)
             max_index = int(np.argmax(emotion_prediction))
-            emotion = self.emotional_classes[max_index]
-            cv.putText(frame, emotion, (x, y-10), cv.FONT_HERSHEY_SIMPLEX, 0.9, (255, 0, 0), 2)
+            self.detected_emotion = self.emotional_classes[max_index]
+            cv.putText(frame, self.detected_emotion, (x, y-10), cv.FONT_HERSHEY_SIMPLEX, 0.9, (255, 0, 0), 2)
 
         rgb_image = cv.cvtColor(frame, cv.COLOR_BGR2RGB)
         h, w, ch = rgb_image.shape
@@ -136,16 +140,30 @@ class DashboardController(QMainWindow):
         self.ui.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
     def saveCaptured(self):
-        # based on the frame display with the emotional classes label, save the display into the directory of "C:\Users\JJ\OneDrive\Desktop\Final-Year-Project\Images"
-        if hasattr(self, "current_frame"):
-            save_dir = "C:\\Users\\JJ\\OneDrive\\Desktop\\Final-Year-Project\\Images"
-            if not os.path.exists(save_dir):
-                os.makedirs(save_dir)
-            
-            options = QFileDialog.Options()
-            file_path, _ = QFileDialog.getSaveFileName(self, "Save Captured Image", save_dir, "Images (*.png *.jpg *.jpeg)", options=options)
-            if file_path:
+        # based on the frame display with the emotional classes label, 
+        # save the display into the directory of "C:\Users\JJ\OneDrive\Desktop\Final-Year-Project\Images"
+        try:
+            if self.current_frame is not None and self.detected_emotion is not None:
+                save_dir = "C:\\Users\\JJ\\OneDrive\\Desktop\\Final-Year-Project\\Images"
+                if not os.path.exists(save_dir):
+                    os.makedirs(save_dir)
+                
+                # options = QFileDialog.Options()
+                # file_path, _ = QFileDialog.getSaveFileName(self, "Save Captured Image", save_dir, "Images (*.png *.jpg *.jpeg)", options=options)
+                # if file_path:
+                #     cv.imwrite(file_path, self.current_frame)
+                #     print("Image saved")
+                # else:
+                #     print("No frame saved")
+
+                timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+                file_name = f"{self.detected_emotion}_{timestamp}.jpg"
+                file_path = os.path.join(save_dir, file_name)
+
                 cv.imwrite(file_path, self.current_frame)
-                print("Image saved")
+                print(f"Image saved to {file_path}")
             else:
-                print("No frame saved")
+                raise ValueError("No frame to save or no emotion detected")
+            
+        except Exception as e:
+            QMessageBox.critical(self, "Error", str(e))
