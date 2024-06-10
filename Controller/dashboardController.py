@@ -46,6 +46,8 @@ class DashboardController(QMainWindow):
         self.current_frame = None
         self.detected_emotion = None
 
+        self.emotional_counts = {emotion:0 for emotion in self.emotional_classes}
+
     def extractFeatures(self, image):
         feature = np.array(image)
         feature = feature.reshape(1, 48, 48, 1)
@@ -94,6 +96,9 @@ class DashboardController(QMainWindow):
             self.detected_emotion = self.emotional_classes[max_index]
             cv.putText(frame, self.detected_emotion, (x, y-10), cv.FONT_HERSHEY_SIMPLEX, 0.9, (255, 0, 0), 2)
 
+            self.emotional_counts[self.detected_emotion] += 1
+            self.updateTable()
+
         rgb_image = cv.cvtColor(frame, cv.COLOR_BGR2RGB)
         h, w, ch = rgb_image.shape
         bytes_per_line = ch * w
@@ -107,6 +112,11 @@ class DashboardController(QMainWindow):
         self.video_label.setPixmap(scaled_img)
 
         self.current_frame = frame
+
+    def updateTable(self):
+        for row, emotion in enumerate(self.emotional_classes):
+            count = self.emotional_counts[emotion]
+            self.ui.tableWidget.setItem(row, 1, QTableWidgetItem(str(count)))
 
     def logout(self):
         print("Logout")
