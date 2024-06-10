@@ -8,13 +8,7 @@ from PyQt5.QtWidgets import (
     QMessageBox,
 )
 import pandas as pd
-
-class userDAO:
-    def __init__(self,csv_path='Database\\user.csv'):
-        self.csv_path = csv_path
-    
-    def get_data(self):
-        return pd.read_csv(self.csv_path)
+from Database.db import Database
 
 class LoginController(QMainWindow):
     def __init__(self, router : QStackedWidget):
@@ -23,8 +17,7 @@ class LoginController(QMainWindow):
         self.ui.setupUi(self)
         self.router = router
 
-        self.userDao = userDAO()
-        self.data = self.userDao.get_data()
+        self.db = Database()
 
         self.ui.loginButton.clicked.connect(self.login)
         self.ui.registerButton.clicked.connect(self.go_register)
@@ -48,12 +41,9 @@ class LoginController(QMainWindow):
             return
 
         # Check if the input data matches the data in the CSV file
-        user_data = self.data.loc[
-            (self.data["Username"] == username)
-            & (self.data["Password"] == password)
-        ]
+        user_data = self.db.find_user(username, password)
 
-        if not user_data.empty:
+        if user_data:
             # Login successful
             message_box.setIcon(QMessageBox.Information)
             message_box.setText("Login successful!")

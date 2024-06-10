@@ -9,7 +9,6 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import Qt
 import pandas as pd
-from Controller.loginController import userDAO
 
 class RegisterController(QMainWindow):
     def __init__(self, router : QStackedWidget):
@@ -17,9 +16,6 @@ class RegisterController(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.router = router
-
-        self.userDao = userDAO()
-        self.data = self.userDao.get_data()
 
         self.ui.regButton.clicked.connect(self.submit)
         self.ui.backButton.clicked.connect(self.toLogin)
