@@ -9,6 +9,7 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import Qt
 import pandas as pd
+from Database.db import Database
 
 class RegisterController(QMainWindow):
     def __init__(self, router : QStackedWidget):
@@ -16,6 +17,8 @@ class RegisterController(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.router = router
+
+        self.db = Database()
 
         self.ui.regButton.clicked.connect(self.submit)
         self.ui.backButton.clicked.connect(self.toLogin)
@@ -42,16 +45,14 @@ class RegisterController(QMainWindow):
             message_box.exec_()
             return
         # check username exist in csv file, if exist prompt error
-        if username in self.data["Username"].values:
+        if self.db.find_unique_user(username):
             message_box.setIcon(QMessageBox.Warning)
             message_box.setText("Username already exists. Please choose another username.")
             message_box.exec_()
             return
 
         # if no error prompt, prompt register success message box and write the username and password into the csv file
-        new_user = pd.DataFrame({"Username": [username], "Password": [password]})
-        self.data = pd.concat([self.data, new_user], ignore_index=True)
-        self.data.to_csv(self.userDao.csv_path, index=False)
+        self.db.insert_user(username, password)
 
         message_box.setIcon(QMessageBox.Information)
         message_box.setText("Registration successful!")

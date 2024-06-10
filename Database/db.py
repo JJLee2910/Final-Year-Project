@@ -14,3 +14,9 @@ class Database:
     
     def find_user(self, username, password):
         return self.user_collection.find_one({'_id': username, 'Password': password})
+    
+    def insert_user(self, username, password):
+        return self.user_collection.insert_one({'_id':username, 'Password':password})
+    
+    def find_unique_user(self, username):
+        return self.user_collection.find_one({'_id':username})
