@@ -38,7 +38,7 @@ class DashboardController(QMainWindow):
         self.emotional_classes = ["Angry", "Contempt", "Disgust", "Fear", "Happy", "Neutral", "Sad", "Surprise"]
 
         # Load counts from file or initialize if not available
-        self.counts_file = "emotion_counts.json"
+        self.counts_file = "Database/emotion_counts.json"
         self.emotion_counts = self.load_counts()
 
         self.create_table()
@@ -56,10 +56,6 @@ class DashboardController(QMainWindow):
 
         self.current_frame = None
         self.detected_emotion = None
-
-        # Load counts from file or initialize if not available
-        self.counts_file = "emotion_counts.json"
-        self.emotion_counts = self.load_counts()
 
     def extractFeatures(self, image):
         feature = np.array(image)
