@@ -97,6 +97,9 @@ class Ui_MainWindow(object):
         self.logoutButton = QtWidgets.QPushButton(self.horizontalLayoutWidget)
         self.logoutButton.setObjectName("logoutButton")
         self.horizontalLayout.addWidget(self.logoutButton)
+        self.pushButton = QtWidgets.QPushButton(self.horizontalLayoutWidget)
+        self.pushButton.setObjectName("pushButton")
+        self.horizontalLayout.addWidget(self.pushButton)
         self.detectButton = QtWidgets.QPushButton(self.horizontalLayoutWidget)
         self.detectButton.setObjectName("detectButton")
         self.horizontalLayout.addWidget(self.detectButton)
@@ -119,5 +122,6 @@ class Ui_MainWindow(object):
         self.titleLabel.setText(_translate("MainWindow", "APU Workspace@Facial Emotion Recognition System"))
         self.label.setText(_translate("MainWindow", "Workplace Emotional Count"))
         self.logoutButton.setText(_translate("MainWindow", "Logout"))
+        self.pushButton.setText(_translate("MainWindow", "Save Captured"))
         self.detectButton.setText(_translate("MainWindow", "Start Detection"))
 from UI import res

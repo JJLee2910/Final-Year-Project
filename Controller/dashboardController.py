@@ -8,12 +8,14 @@ from PyQt5.QtWidgets import (
     QSizePolicy,
     QHeaderView,
     QVBoxLayout,
-    QLabel
+    QLabel,
+    QFileDialog
 )
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPainter, QPixmap, QImage
 import cv2 as cv
 import numpy as np
+import os
 from model import create_model
 
 class DashboardController(QMainWindow):
@@ -25,6 +27,7 @@ class DashboardController(QMainWindow):
 
         self.ui.detectButton.clicked.connect(self.startDetection)
         self.ui.logoutButton.clicked.connect(self.logout)
+        self.ui.pushButton.clicked.connect(self.saveCaptured)
 
         self.create_table()
         self.loadModel()
@@ -99,6 +102,8 @@ class DashboardController(QMainWindow):
         self.video_label.setGeometry(0, 0, chart_frame_size.width(), chart_frame_size.height())
         self.video_label.setPixmap(scaled_img)
 
+        self.current_frame = frame
+
     def logout(self):
         print("Logout")
         if self.video is not None:
@@ -130,10 +135,17 @@ class DashboardController(QMainWindow):
         # Resize the columns to fit the contents
         self.ui.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
-if __name__ == "__main__":
-    import sys
-    app = QApplication(sys.argv)
-    router = QStackedWidget()
-    window = DashboardController(router)
-    window.show()
-    sys.exit(app.exec_())
+    def saveCaptured(self):
+        # based on the frame display with the emotional classes label, save the display into the directory of "C:\Users\JJ\OneDrive\Desktop\Final-Year-Project\Images"
+        if hasattr(self, "current_frame"):
+            save_dir = "C:\\Users\\JJ\\OneDrive\\Desktop\\Final-Year-Project\\Images"
+            if not os.path.exists(save_dir):
+                os.makedirs(save_dir)
+            
+            options = QFileDialog.Options()
+            file_path, _ = QFileDialog.getSaveFileName(self, "Save Captured Image", save_dir, "Images (*.png *.jpg *.jpeg)", options=options)
+            if file_path:
+                cv.imwrite(file_path, self.current_frame)
+                print("Image saved")
+            else:
+                print("No frame saved")
