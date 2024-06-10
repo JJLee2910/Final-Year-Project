@@ -18,6 +18,9 @@ import numpy as np
 import os
 import datetime
 from model import create_model
+# from Database.db import Database
+import json
+
 
 class DashboardController(QMainWindow):
     def __init__(self, router: QStackedWidget):
@@ -26,9 +29,17 @@ class DashboardController(QMainWindow):
         self.ui.setupUi(self)
         self.router = router
 
+        # self.db = Database()
+
         self.ui.detectButton.clicked.connect(self.startDetection)
         self.ui.logoutButton.clicked.connect(self.logout)
         self.ui.pushButton.clicked.connect(self.saveCaptured)
+
+        self.emotional_classes = ["Angry", "Contempt", "Disgust", "Fear", "Happy", "Neutral", "Sad", "Surprise"]
+
+        # Load counts from file or initialize if not available
+        self.counts_file = "emotion_counts.json"
+        self.emotion_counts = self.load_counts()
 
         self.create_table()
         self.loadModel()
@@ -46,7 +57,9 @@ class DashboardController(QMainWindow):
         self.current_frame = None
         self.detected_emotion = None
 
-        self.emotional_counts = {emotion:0 for emotion in self.emotional_classes}
+        # Load counts from file or initialize if not available
+        self.counts_file = "Database/emotion_counts.json"
+        self.emotion_counts = self.load_counts()
 
     def extractFeatures(self, image):
         feature = np.array(image)
@@ -96,8 +109,9 @@ class DashboardController(QMainWindow):
             self.detected_emotion = self.emotional_classes[max_index]
             cv.putText(frame, self.detected_emotion, (x, y-10), cv.FONT_HERSHEY_SIMPLEX, 0.9, (255, 0, 0), 2)
 
-            self.emotional_counts[self.detected_emotion] += 1
+            self.emotion_counts[self.detected_emotion] += 1
             self.updateTable()
+            self.save_counts()
 
         rgb_image = cv.cvtColor(frame, cv.COLOR_BGR2RGB)
         h, w, ch = rgb_image.shape
@@ -114,9 +128,16 @@ class DashboardController(QMainWindow):
         self.current_frame = frame
 
     def updateTable(self):
+        print("Updating table with emotion counts:", self.emotion_counts)
+        # self.db.update_emotion_counts(self.emotional_counts)
+
+        # emotion_count_from_db = self.db.get_emotion_counts()
         for row, emotion in enumerate(self.emotional_classes):
-            count = self.emotional_counts[emotion]
-            self.ui.tableWidget.setItem(row, 1, QTableWidgetItem(str(count)))
+            count = self.emotion_counts[emotion]
+            print(f"Setting row {row} ({emotion}) to count {count}")
+            item = QTableWidgetItem(str(count))
+            item.setFlags(item.flags() ^ Qt.ItemIsEditable)
+            self.ui.tableWidget.setItem(row, 1, item)
 
     def logout(self):
         print("Logout")
@@ -129,17 +150,15 @@ class DashboardController(QMainWindow):
         self.ui.tableWidget.setRowCount(8)  # 8 emotional classes
         self.ui.tableWidget.setColumnCount(2)  # 2 columns
 
-        # Set the emotional classes in the first column
-        self.emotional_classes = ["Angry", "Contempt", "Disgust", "Fear", "Happy", "Neutral", "Sad", "Surprise"]
-
         # Store the count of each emotional classes detected from the detector
         for row, emotion in enumerate(self.emotional_classes):
             item = QTableWidgetItem(emotion)
             item.setFlags(item.flags() ^ Qt.ItemIsEditable)
             self.ui.tableWidget.setItem(row, 0, item)
 
-        for row in range(8):
-            item = QTableWidgetItem("0")
+        for row, emotion in enumerate(self.emotional_classes):
+            count = self.emotion_counts[emotion]
+            item = QTableWidgetItem(str(count))
             item.setFlags(item.flags() ^ Qt.ItemIsEditable)
             self.ui.tableWidget.setItem(row, 1, item)
 
@@ -177,3 +196,27 @@ class DashboardController(QMainWindow):
             
         except Exception as e:
             QMessageBox.critical(self, "Error", str(e))
+
+    def save_counts(self):
+        """Save emotion counts to a file."""
+        try:
+            with open(self.counts_file, 'w') as file:
+                json.dump(self.emotion_counts, file)
+            print(f"Emotion counts saved to {self.counts_file}")
+        except Exception as e:
+            print(f"Error saving counts: {e}")
+
+    def load_counts(self):
+        """Load emotion counts from a file."""
+        if os.path.exists(self.counts_file):
+            try:
+                with open(self.counts_file, 'r') as file:
+                    counts = json.load(file)
+                print(f"Emotion counts loaded from {self.counts_file}")
+                return counts
+            except Exception as e:
+                print(f"Error loading counts: {e}")
+                return {emotion: 0 for emotion in self.emotional_classes}
+        else:
+            print(f"No counts file found. Initializing counts to zero.")
+            return {emotion: 0 for emotion in self.emotional_classes}
