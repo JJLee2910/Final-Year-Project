@@ -1,4 +1,4 @@
-from vgg_model import create_model
+from Validator.VGG16.vgg_model import create_model
 from keras.models import load_model
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from sklearn.metrics import confusion_matrix, classification_report, ConfusionMatrixDisplay

@@ -3,7 +3,7 @@ import numpy as np
 from tensorflow import keras
 from keras.models import load_model # type: ignore
 # from model import create_model
-from vgg_model import create_model
+from Validator.VGG16.vgg_model import create_model
 
 emotion_dict = {0: "Angry", 1: "Contempt", 2: "Disgust", 3: "Fear", 4: "Happy", 5: "Neutral", 6: "Sad", 7:"Surprise"}
 
