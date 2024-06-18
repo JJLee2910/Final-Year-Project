@@ -124,4 +124,4 @@ class Ui_MainWindow(object):
         self.logoutButton.setText(_translate("MainWindow", "Logout"))
         self.pushButton.setText(_translate("MainWindow", "Save Captured"))
         self.detectButton.setText(_translate("MainWindow", "Start Detection"))
-from UI import res
+from View import res

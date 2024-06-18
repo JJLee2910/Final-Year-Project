@@ -101,4 +101,4 @@ class Ui_MainWindow(object):
         self.registerButton.setText(_translate("MainWindow", "Register"))
         self.loginButton.setText(_translate("MainWindow", "Login"))
         self.titleLabel.setText(_translate("MainWindow", "APU Workspace@Facial Emotion Recognition System"))
-from UI import res
+from View import res
