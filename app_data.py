@@ -1,4 +1,4 @@
-from UI.Login import *
+from View.Login import *
 
 
 # singleton data class
