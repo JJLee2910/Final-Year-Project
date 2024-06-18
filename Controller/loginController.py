@@ -1,4 +1,4 @@
-from UI.Login import Ui_MainWindow
+from View.Login import Ui_MainWindow
 from PyQt5.QtWidgets import (
     QApplication,
     QMainWindow,

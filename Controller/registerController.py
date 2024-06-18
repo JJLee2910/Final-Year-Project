@@ -1,4 +1,4 @@
-from UI.register import Ui_MainWindow
+from View.register import Ui_MainWindow
 from PyQt5.QtWidgets import (
     QApplication,
     QMainWindow,

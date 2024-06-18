@@ -1,7 +1,7 @@
 import sys
 from PyQt5.QtCore import Qt
-from UI.Login import *
-from UI.register import *
+from View.Login import *
+from View.register import *
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
 from Controller import (
     loginController,
