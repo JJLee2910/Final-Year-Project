@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 emotion_dict = {0: "Angry", 1: "Disgusted", 2: "Fearful", 3: "Happy", 4: "Neutral", 5: "Sad", 6: "Surprised", 7:"Contempt"}
 
 emotion_model = create_model(num_classes=8)
-emotion_model.load_weights("Model/Optimized Model 2/model_v3.h5")
+emotion_model.load_weights("Model/Optimized Model 2/model3.h5")
 
 test_datagen = ImageDataGenerator(rescale=1 / 255.0)
 

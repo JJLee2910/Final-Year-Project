@@ -64,7 +64,7 @@ class DashboardController(QMainWindow):
     
     def loadModel(self):
         self.emotional_model = create_model(num_classes=8)
-        self.emotional_model.load_weights("Model/Optimized Model 2/model_v3.h5")
+        self.emotional_model.load_weights("Model/Optimized Model 2/model3.h5")
         print("Model loaded from disk")
 
     def startDetection(self):
