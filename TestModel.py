@@ -4,12 +4,13 @@ from tensorflow import keras
 from keras.models import load_model # type: ignore
 # from model import create_model
 # from Validator.VGG16.vgg_model import create_model
-from Validator.VGG_CNN.vgg_cnn import create_combined_model
+# from Validator.VGG_CNN.vgg_cnn import create_combined_model
+from model_gblr import create_model
 
 emotion_dict = {0: "Angry", 1: "Contempt", 2: "Disgust", 3: "Fear", 4: "Happy", 5: "Neutral", 6: "Sad", 7:"Surprise"}
 
 num_classes = 8
-emotion_model = create_combined_model(num_classes=num_classes)
+emotion_model = create_model(num_classes=num_classes)
 
 # extracting features from the image
 def extract_features(image):
@@ -18,7 +19,7 @@ def extract_features(image):
     return feature / 255.0
 
 # load weights into new model
-emotion_model.load_weights("Model/CNN_VGG Model/vgg_custom.h5")
+emotion_model.load_weights("model3.h5")
 print("Loaded model from disk")
 
 face_cascade = cv2.CascadeClassifier('haarcascades/haarcascade_frontalface_default.xml')
