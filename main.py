@@ -29,7 +29,7 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     router = QtWidgets.QStackedWidget()
     add_pages(router)
-    router.setGeometry(100, 100, 800, 650)
+    router.setGeometry(100, 100, 800, 600)
     router.setCurrentIndex(0)
     router.show()
     sys.exit(app.exec_())
