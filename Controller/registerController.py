@@ -23,6 +23,11 @@ class RegisterController(QMainWindow):
         self.ui.regButton.clicked.connect(self.submit)
         self.ui.backButton.clicked.connect(self.toLogin)
 
+    def clear_input(self):
+        self.ui.usernameRegInput.setText("")
+        self.ui.passwordRegInput.setText("")
+        self.ui.passwordRegInput_2.setText("")
+
     def submit(self):
         # initialize input values from the form
         username = self.ui.usernameRegInput.text()
@@ -58,12 +63,12 @@ class RegisterController(QMainWindow):
         message_box.setText("Registration successful!")
         message_box.exec_()
 
-        # intialize the input field to empty again
-        self.ui.usernameRegInput.setText("")
-        self.ui.passwordRegInput.setText("")
-        self.ui.passwordRegInput_2.setText("")
+        self.clear_input()
 
         self.router.setCurrentIndex(0)
 
     def toLogin(self):
+        
+        self.clear_input()
+
         self.router.setCurrentIndex(0)
