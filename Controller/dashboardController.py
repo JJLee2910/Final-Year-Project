@@ -140,6 +140,16 @@ class DashboardController(QMainWindow):
         if self.video is not None:
             self.video.release()
             cv.destroyAllWindows()
+
+        layout = self.ui.chart_frame.layout()
+        if layout is not None:
+            while layout.count():
+                child = layout.takeAt(0)
+                if child.widget() is not None:
+                    child.widget().deleteLater()
+
+        self.video_label.clear()
+        
         self.router.setCurrentIndex(0)
 
     def create_table(self):
