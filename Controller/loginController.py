@@ -25,6 +25,10 @@ class LoginController(QMainWindow):
         # print("Is self.router initialized?", self.router is not None)
         # print("Index of login page:", self.router.indexOf(self.ui.loginPageWidget))
 
+    def clear_input(self):
+        self.ui.usernameInput.setText("")
+        self.ui.passwordInput.setText("")
+
     def login(self):
         # Get the input values from the login form  
         username = self.ui.usernameInput.text()
@@ -50,8 +54,7 @@ class LoginController(QMainWindow):
             message_box.exec_()
 
             # initialize the input field to empty
-            self.ui.usernameInput.setText("")
-            self.ui.passwordInput.setText("")
+            self.clear_input()
 
             # Perform any additional actions after successful login
             print("2")
@@ -63,4 +66,5 @@ class LoginController(QMainWindow):
             message_box.exec_()
     
     def go_register(self):
+        self.clear_input()
         self.router.setCurrentIndex(1)
