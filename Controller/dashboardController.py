@@ -196,7 +196,8 @@ class DashboardController(QMainWindow):
                 file_path = os.path.join(save_dir, file_name)
 
                 cv.imwrite(file_path, self.current_frame)
-                print(f"Image saved to {file_path}")
+                # print(f"Image saved to {file_path}")
+                QMessageBox.information(self, "Image Saved", f"Image is saved to {file_path}")
             else:
                 raise ValueError("No frame to save or no emotion detected")
             
