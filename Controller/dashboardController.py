@@ -45,6 +45,7 @@ class DashboardController(QMainWindow):
         self.loadModel()
 
         self.video = None
+        self.detection_active = False
 
         # Add QLabel for displaying video frames
         self.video_label = QLabel(self.ui.chart_frame)
@@ -69,9 +70,11 @@ class DashboardController(QMainWindow):
 
     def startDetection(self):
         print("detection started")
-        self.video = cv.VideoCapture(0)
+        if self.video is None:  # Check if video is already running
+            self.video = cv.VideoCapture(0)
+            self.detection_active = True
 
-        while True:
+        while self.detection_active:
             ret, frame = self.video.read()
             if not ret:
                 print("Error: Failed to capture frame")
@@ -88,6 +91,7 @@ class DashboardController(QMainWindow):
 
         if self.video is not None:
             self.video.release()
+            self.video = None  # Ensure the video capture object is reset
             cv.destroyAllWindows()
 
     def display_frame(self, frame):
@@ -117,7 +121,7 @@ class DashboardController(QMainWindow):
 
         chart_frame_size = self.ui.chart_frame.size()
         scaled_img = qt_img.scaled(chart_frame_size, Qt.KeepAspectRatio)
-        
+
         self.video_label.setGeometry(0, 0, chart_frame_size.width(), chart_frame_size.height())
         self.video_label.setPixmap(scaled_img)
 
@@ -137,9 +141,13 @@ class DashboardController(QMainWindow):
 
     def logout(self):
         print("Logout")
+        self.detection_active = False
         if self.video is not None:
             self.video.release()
+            self.video = None
             cv.destroyAllWindows()
+
+        self.video_label.clear()
 
         layout = self.ui.chart_frame.layout()
         if layout is not None:
@@ -148,7 +156,8 @@ class DashboardController(QMainWindow):
                 if child.widget() is not None:
                     child.widget().deleteLater()
 
-        self.video_label.clear()
+        self.current_frame = None
+        self.detected_emotion = None
         
         self.router.setCurrentIndex(0)
 
