@@ -68,7 +68,5 @@ class RegisterController(QMainWindow):
         self.router.setCurrentIndex(0)
 
     def toLogin(self):
-        
         self.clear_input()
-
         self.router.setCurrentIndex(0)
