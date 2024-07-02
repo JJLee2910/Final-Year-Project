@@ -6,6 +6,7 @@ from keras.layers import Conv2D, MaxPooling2D, Dense, Dropout, Flatten
 from keras.optimizers import Adam
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from keras.callbacks import TensorBoard
+from keras.utils import plot_model
 
 # Initialize image data generator with rescaling
 train_data_gen = ImageDataGenerator(rescale=1./255)
@@ -53,6 +54,8 @@ optimizer = Adam(learning_rate=0.0001)
 emotion_model.compile(loss='categorical_crossentropy', optimizer=optimizer, metrics=['accuracy'])
 
 emotion_model.summary()
+
+plot_model(emotion_model, show_shapes = True, show_layer_names = True)
 
 # Train the neural network/model
 emotion_model_info = emotion_model.fit(
