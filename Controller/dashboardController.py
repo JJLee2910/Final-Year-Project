@@ -113,6 +113,9 @@ class DashboardController(QMainWindow):
             self.updateTable()
             self.save_counts()
 
+            if self.detected_emotion in ["Sad", "Angry"]:
+                QMessageBox.warning(self, "Detected Negative Emotion", f"Negative emotion of {self.detected_emotion} is found")
+
         rgb_image = cv.cvtColor(frame, cv.COLOR_BGR2RGB)
         h, w, ch = rgb_image.shape
         bytes_per_line = ch * w
