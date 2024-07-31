@@ -18,7 +18,7 @@ This project aims to develop a facial emotion recognition system that leverages 
 4. View the emotion count and trends on the GUI.
 
 ## Data
-The system uses the FER dataset(https://www.kaggle.com/datasets/prajwalsood/google-fer-image-format/data) for training and validation. The data is preprocessed and augmented to improve model accuracy. The dataset includes grayscale images with dimensions of 48x48 pixels.
+The system uses the [FER dataset](https://www.kaggle.com/datasets/prajwalsood/google-fer-image-format/data) for training and validation. The data is preprocessed and augmented to improve model accuracy. The dataset includes grayscale images with dimensions of 48x48 pixels.
 
 ## System Architecture
 ### MVC Architecture
